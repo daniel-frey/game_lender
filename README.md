@@ -1,4 +1,4 @@
-#Game Lender
+# Game Lender
 
 #### What is it?
 Game lender is an application designed to allow users to maintain a video game library of their own, search for reviews, and
