@@ -61,12 +61,12 @@ class RegistrationForm extends Component {
 
     render() {
         return (
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} class="container">
             <input name='username' placeholder='user name' value={this.state.username} onChange={this.onChangeUserName} />
             <input name='email' placeholder='user email' value={this.state.email} onChange={this.onChangeUserEmail} />
             <input name='password' type='password' placeholder='password' value={this.state.password1} onChange={this.onChangePassword1} />
             <input name='verify-password' type='password' placeholder='verify password' value={this.state.password2} onChange={this.onChangePassword2} />
-            <button type='submit'>Register</button>
+            <button type='submit' class="btn btn-skin">Register</button>
         </form>
         );
     }

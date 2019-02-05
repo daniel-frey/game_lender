@@ -7,8 +7,9 @@ import Header from './header/header'
 import Landing from './landing/landing'
 import Main from './main/main'
 import Footer from './footer/footer'
-import '/Users/danielfrey/Documents/game_lender/gl_frontend/src/fonts/glyphicons-halflings-regular.eot'
+import './fonts/glyphicons-halflings-regular.eot'
 import './font-awesome-4.4.0/css/font-awesome.min.css'
+
 
 class App extends Component {
   render() {

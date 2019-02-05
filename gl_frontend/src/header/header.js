@@ -45,34 +45,6 @@ const Header = () => {
         </div>
     </div> 
   </div>
-	{/* <div className="container">
-		<div id="carousel-example-generic" className="carousel slide row hidden-xs" data-ride="carousel" data-interval="4000">
-			<ol className="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			</ol>
-		 
-			<div className="carousel-inner">
-				<div className="item active">
-					<img src="images/banner1.jpg">
-				</div>
-				<div className="item">
-					<img src="images/banner2.jpg">
-				</div>
-				<div className="item">
-					<img src="images/banner3.jpg">
-				</div>
-			</div>
-		 
-			<a className="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-				<span className="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-				<span className="glyphicon glyphicon-chevron-right"></span>
-			</a>
-		</div>
-	</div> */}
 </header>
     );
 };
