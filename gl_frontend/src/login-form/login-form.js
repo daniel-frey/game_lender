@@ -15,6 +15,7 @@ class LoginForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    
     onChangeUserName(event) {
         this.setState({
             username: event.target.value
@@ -30,21 +31,19 @@ class LoginForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        const url = 'http://localhost:8000/auth/v1/login'
+        const url = 'http://localhost:8000/auth/v1/login/'
         superagent
-            .post(url)
-            .send({
-                username : this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-            }).then(response => {
+            .post(url).set('Content-Type', 'application/json')
+            .send(this.state)
+            .then(response => {
                 this.props.onLogin({token: response.body.token})
+                console.log(response.body);
             }).then(token => {
 
             }).catch(error => {
                 console.error(error)
                 this.props.onLogin({error:error.toString()})
-            });
+        });
     }
 
 

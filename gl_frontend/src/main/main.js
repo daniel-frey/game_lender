@@ -9,7 +9,7 @@ const Main = () => {
 			<div id="main-content">
 				<article>
 					<div className="art-header">
-						<a href="single.html"><h2>Lorem ipsum dolor sit amet</h2></a>
+						<a href="single.html"><h2>Super Mario World</h2></a>
 						<div className="info">
 							By <a href="#">Admin</a> June 12, 2015 - <i className="fa fa-comment"></i> 0 Comments
 							<ul className="list-inline">
@@ -28,12 +28,13 @@ const Main = () => {
 						</div>
 					</div>
 					<div className="art-content">
-						<img src="../images/1.png" />
-						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor inviduntut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt orem ipsum dolor sit amet, consetetur sadipscing <a href="single.html">MORE...</a></p>
+						<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1hjg.jpg" />
+						<button class="btn btn-primary btn-block mar-lg-bottom "/>
+						<p>Super Mario World (known in Japan as Super Mario World: Super Mario Bros. 4) is a side-scrolling platformer developed by Nintendo EAD and published by Nintendo for the Super Nintendo Entertainment System on November 21, 1990 (in Japan), August 31, 1991 (in North America), and April 11, 1992 (in Europe). One of the launch titles of the SNES (and bundled with early systems in North America), Super Mario World is the fifth main game in the Super Mario series. (starring Nintendo's mascot, Mario, and his brother, Luigi). The game follows both Mario brothers as they explore Dinosaur Land (known for its large amount of dinosaurs) to find and defeat the evil Koopa king Bowser (and his seven underlings, the Koopalings) while rescuing Princess Toadstool. 
+Along with new abilities (such as the "Spin Jump"), a new power-up (the "Cape Feather") and more obstacles, the game introduces dinosaur companions (known as Yoshi) that Mario and Luigi can ride. Yoshi, known for using their long tongues to snare and eat enemies, have become a fan-favorite among the series (giving them their own games and spin-offs, most notably this game's prequel). Special bundles of the SNES in 1994 included a compilation cartridge mixing Super Mario World with Super Mario All-Stars. The only difference in this version is a new sprite set for Luigi. The original game was later ported to the Game Boy Advance on February 11, 2002 as Super Mario World: Super Mario Advance 2. Along with a special version of the original Mario Bros., the port includes a variety of differences, including Luigi as a selectable character (who now has unique features, such as his floating jump from Super Mario Bros. 2), new voice acting, and the ability to save anywhere. The original game was also digitally re-released in Nintendo's Virtual Console platform for the Wii (on February 5, 2007) and Wii U (on April 26, 2013).<a href="single.html">MORE...</a></p>
 					</div>
 				</article>
 			  <hr/>
-				
 				<center>
 					<ul className="pagination">
 						<li>
@@ -53,7 +54,6 @@ const Main = () => {
 						</li>
 					</ul>
 				</center>
-		
 			</div>
 		</div>
 		<div className="col-md-4">
