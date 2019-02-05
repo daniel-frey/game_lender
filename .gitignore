@@ -1,18 +1,7 @@
-Source: https://github.com/github/gitignore/blob/master/Python.gitignore
-
-# User generated
-ENV/
-.vscode
-.idea
-.DS_Store
-*complete*.json
-static/*
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
 
 # C extensions
 *.so
@@ -56,6 +45,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -63,9 +53,8 @@ coverage.xml
 
 # Django stuff:
 *.log
-.static_storage/
-.media/
 local_settings.py
+db.sqlite3
 
 # Flask stuff:
 instance/
@@ -114,19 +103,10 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# CSV Files
-*.csv
-.csv
+# other things
+.DS_Store
+.vscode
+.idea
 
-# AWM PEM File
-*.pem
-.pem
-
-# Bash Scripts
-*.sh
-.sh
-
-# json files
-sg_id.json
-rdsinstance_completed.json
-ec2_instance_completed.json
+# don't push root-level static (invidual modules have their own static)
+static/*
