@@ -7,8 +7,7 @@ const Main = () => {
 	<div className="row">
 		<div className="col-md-6 col-md-offset-1">
 			<div id="main-content">
-                {/* This will be used with a foreach */}
-				{/* <article>
+				<article>
 					<div className="art-header">
 						<a href="single.html"><h2>Lorem ipsum dolor sit amet</h2></a>
 						<div className="info">
@@ -33,7 +32,7 @@ const Main = () => {
 						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor inviduntut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt orem ipsum dolor sit amet, consetetur sadipscing <a href="single.html">MORE...</a></p>
 					</div>
 				</article>
-			  <hr/> */}
+			  <hr/>
 				
 				<center>
 					<ul className="pagination">

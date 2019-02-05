@@ -30,7 +30,7 @@ class LoginForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        const url = 'http://localhost:8000/api/v1/login'
+        const url = 'http://localhost:8000/auth/v1/login'
         superagent
             .post(url)
             .send({

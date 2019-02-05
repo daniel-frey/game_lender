@@ -50,13 +50,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'gl_backend.urls'
@@ -171,14 +172,13 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # rest framework + react cors settings
 
-if DEBUG:
-    CORS_ORIGIN_ALLOW_ALL = True
-else:
-    CORS_ORIGIN_WHITELIST = tuple(
-        os.environ.get(
-            'CORS_ORIGIN_WHITELIST',
-            'localhost',
-        ).split()
-    )
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = tuple(
+    os.environ.get(
+        'CORS_ORIGIN_WHITELIST',
+        'localhost',
+    ).split()
+)
 
 SITE_ID = 1

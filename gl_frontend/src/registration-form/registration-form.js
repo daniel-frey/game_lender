@@ -8,11 +8,13 @@ class RegistrationForm extends Component {
         this.state = {
             username: '',
             email: '',
-            password: ''
+            password1: '',
+            password2: ''
         }
         this.onChangeUserName = this.onChangeUserName.bind(this);
         this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangePassword1 = this.onChangePassword1.bind(this);
+        this.onChangePassword2 = this.onChangePassword2.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -28,38 +30,42 @@ class RegistrationForm extends Component {
         });
     }
 
-    onChangePassword(event) {
+    onChangePassword1(event) {
         this.setState({
-            password: event.target.value
+            password1: event.target.value
+        });
+    }
+
+    onChangePassword2(event) {
+        this.setState({
+            password2: event.target.value
         });
     }
 
     onSubmit(event) {
         event.preventDefault();
-        const url = 'http://localhost:8000/api/v1/register'
+        const url = 'http://localhost:8000/auth/v1/registration/'
         superagent
-            .post(url)
-            .send({
-                username : this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-            }).then(response => {
+            .post(url).set('Content-Type', 'application/json')
+            .send(this.state)
+            .then(response => {
                 this.props.onRegister({token: response.body.token})
+                console.log(response.body);
             }).then(token => {
 
             }).catch(error => {
                 console.error(error)
                 this.props.onRegister({error:error.toString()})
-            });
+        });
     }
-
 
     render() {
         return (
         <form onSubmit={this.onSubmit}>
             <input name='username' placeholder='user name' value={this.state.username} onChange={this.onChangeUserName} />
             <input name='email' placeholder='user email' value={this.state.email} onChange={this.onChangeUserEmail} />
-            <input name='password' type='password' placeholder='password' value={this.state.password} onChange={this.onChangePassword} />
+            <input name='password' type='password' placeholder='password' value={this.state.password1} onChange={this.onChangePassword1} />
+            <input name='verify-password' type='password' placeholder='verify password' value={this.state.password2} onChange={this.onChangePassword2} />
             <button type='submit'>Register</button>
         </form>
         );
