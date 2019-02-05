@@ -31,16 +31,22 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gl_backend',
+    'django.contrib.sites',
+    'django.contrib.admin',
     'corsheaders',
+    'allauth',
+    'allauth.account',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'gl_backend',
+    'gl_auth',
 ]
 
 MIDDLEWARE = [
@@ -157,6 +163,12 @@ REST_FRAMEWORK = {
     )
 }
 
+
+# rest framework auth settings
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
 # rest framework + react cors settings
 
 if DEBUG:
@@ -168,3 +180,5 @@ else:
             'localhost',
         ).split()
     )
+
+SITE_ID = 1
