@@ -22,7 +22,7 @@ class Game(models.Model):
         return f'Game: {self.title}'
 
 
-class GameStatus(models.Model):
+class UserGameCopy(models.Model):
     """ model for a unique game in a user's library. Includes info about
     status, who's checking it out, when it's due back
 
@@ -66,3 +66,7 @@ class GameStatus(models.Model):
 
     def __str__(self):
         return f'{self.owner}\'s {self.game.title}'
+
+
+class BorrowEvent(models.Model):
+    pass

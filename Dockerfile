@@ -5,8 +5,8 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /src
 WORKDIR /src
 
-# RUN apt-get update && \
-#     apt-get install -y gcc g++
+RUN apt-get update && \
+    apt-get install -y gcc g++
 
 COPY . /src
 
