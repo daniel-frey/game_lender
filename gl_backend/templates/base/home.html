@@ -24,7 +24,7 @@
               </li>
             </ul>
           </div>
-          
+
         </div>
         <div class="art-content">
           <img src="{% static "images/1.png" %}" />
@@ -55,7 +55,7 @@
               </li>
             </ul>
           </div>
-          
+
         </div>
         <div class="art-content">
           <img src="{% static "images/2.png" %}" />
@@ -142,51 +142,5 @@
     </div>
   </div>
   </div>
-
-
 </div>
-<script type="text/javascript" src="{% static "rest_framework/js/jquery-2.1.1.js" %}></script>
-	<script type="text/javascript" src="{% static "rest_framework/js/bootstrap.min.js" %}></script>
-	
-	<script>
-		if ($(window).width() < 1199) {
-			$('#sidebar').affix({
-			  offset: {
-				top: 398
-			  }
-			}); 
-		} else {
-			$('#sidebar').affix({
-			  offset: {
-				top: 442
-			  }
-			}); 
-		}
-
-		$(function() {
-			$('#nav-wrapper').height($("#nav").height());
-			
-			$('#nav').affix({
-				offset: { top: $('#nav').offset().top }
-			});
-		});
-	</script>
-	
-	<script src="{% static "owl-carousel/owl.carousel.js" %}></script>
-    <script>
-    $(document).ready(function() {
-      $("#owl-demo1").owlCarousel({
-        autoPlay: 3000,
-        items : 3,
-		itemsDesktop : [1199,2],
-        itemsDesktopSmall : [979,2]
-      });
-	  $("#owl-demo2").owlCarousel({
-        autoPlay: 3000,
-        items : 3,
-		itemsDesktop : [1199,2],
-        itemsDesktopSmall : [979,2]
-      });
-    });
-    </script>
 {% endblock content %}
