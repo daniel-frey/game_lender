@@ -1,13 +1,23 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<div>
-  <form method="post">
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <button type="submit">Submit</button>
-  </form>
-</div>
+<div class="row" id="page-content" >
+  <div class="col-md-8 col-md-offset-2 index-page container">
+    <div id="main-content">
+      <article>
+        <div class="art-header">
+          <h1 class="t-center">Login</h1>
+        </div>
+        <div class="art-content">
+          <div id="contact_form">
+            <form method="post" name="form1" id="ff" method="post" action="contact.php">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <center><button class="btn btn-skin" type="submit">Register</button></center>
+            </form>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
 {% endblock %}
