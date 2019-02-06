@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>Details for
+{% if game.owner == user %}
+your
+{% else %}
+{{ game.owner }}'s
+{% endif %}
+{{ game.game.title }}</h2>
+
+{% endblock content %}
