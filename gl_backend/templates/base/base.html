@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="static/css/font-awesome.min.css"  type="text/css">
-    <link href="static/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="static/owl-carousel/owl.theme.css" rel="stylesheet">	
+    <link href="{% sass_src 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% sass_src 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% sass_src 'owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% sass_src 'owl-carousel/owl.theme.css' %}" rel="stylesheet">	
     <link href="{% sass_src 'css/_base.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'css/style.css' %}" rel="stylesheet" type="text/css" />
     <link href="http://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet" type="text/css">
@@ -105,5 +105,49 @@
     {% block content %}
     {% endblock content %}
   </main>
+  <script type="text/javascript" src="{% static "owl-carousel/jquery-2.1.1.js" %}"></script>
+<script type="text/javascript" src="{% static "owl-carousel/bootstrap.min.js" %}"></script>
+
+	<script>
+		if ($(window).width() < 1199) {
+			$('#sidebar').affix({
+			  offset: {
+				top: 398
+			  }
+			}); 
+		} else {
+			$('#sidebar').affix({
+			  offset: {
+				top: 442
+			  }
+			}); 
+		}
+
+		$(function() {
+			$('#nav-wrapper').height($("#nav").height());
+			
+			$('#nav').affix({
+				offset: { top: $('#nav').offset().top }
+			});
+		});
+	</script>
+	
+	<script src="{% static "owl-carousel/owl.carousel.js" %}"></script>
+    <script>
+    $(document).ready(function() {
+      $("#owl-demo1").owlCarousel({
+        autoPlay: 3000,
+        items : 3,
+		itemsDesktop : [1199,2],
+        itemsDesktopSmall : [979,2]
+      });
+	  $("#owl-demo2").owlCarousel({
+        autoPlay: 3000,
+        items : 3,
+		itemsDesktop : [1199,2],
+        itemsDesktopSmall : [979,2]
+      });
+    });
+    </script>
 </body>
 </html>
