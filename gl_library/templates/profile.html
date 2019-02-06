@@ -1,3 +1,6 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
 
 <h2>Your Profile</h2>
 {% if messages %}
@@ -5,3 +8,67 @@
     {{ message }}
   {% endfor %}
 {% endif %}
+
+<h3>Games you're borrowing</h3>
+<ul>
+{% for game in borrowing_games %}
+<li>
+{{ game.game.title }} (borrowed {{ game.checked_out_date }})
+</li>
+{% endfor %}
+</ul>
+
+<h3>Games you're lending</h3>
+<ul>
+{% for game in lending_games %}
+<li>{{ game.game.title }} (lending to {{ game.checked_out_user }} since {{game.checked_out_date}})</li>
+<form method="POST" action="{% url 'mark_as_returned_view' %}">
+{% csrf_token %}
+<input type="hidden" value="{{ game.id }}" name="game_id">
+<input type="submit" value="Mark as returned">
+</form>
+{% endfor %}
+</ul>
+
+<h3>Borrow requests on your games</h3>
+
+<ul>
+{% for request in incoming_borrow_requests %}
+<li>
+{{ request.game.game.title }} (requested by {{ request.borrower }})
+<form method="POST" action="{% url 'accept_request_view' %}">
+{% csrf_token %}
+<input type="hidden" value="{{ request.id }}" name="request">
+<input type="submit" value="Accept Request">
+</form>
+<form method="POST" action="{% url 'deny_request_view' %}">
+{% csrf_token %}
+<input type="hidden" value="{{ request.id }}" name="request">
+<input type="submit" value="Deny Request">
+</form>
+</li>
+{% endfor %}
+</ul>
+
+<h3>Borrow requests you've made</h3>
+
+<ul>
+{% for request in outgoing_borrow_requests %}
+<li>
+{{ request.game.game.title }} (owned by {{ request.game.owner }})
+</li>
+{% endfor %}
+</ul>
+
+<h3>Request history (your games)</h3>
+
+<ul>
+{% for request in request_history %}
+<li>
+{{ request.game.game.title }} - requested by {{ request.borrower }} on {{ request.game.checked_out_date }} ({{ request.status }})
+</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}
+

@@ -5,10 +5,16 @@ from django.contrib import messages
 
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
-from django.urls import reverse_lazy
 
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils import timezone
+
+
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render
+)
 
 from .models import Game, UserGameCopy, BorrowEvent
 
@@ -97,3 +103,74 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'profile.html'
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['borrowing_games'] = UserGameCopy.objects.filter(status='out', checked_out_user=self.request.user)
+        context['lending_games'] = UserGameCopy.objects.filter(status='out', owner=self.request.user)
+        context['incoming_borrow_requests'] = BorrowEvent.objects.filter(game__owner=self.request.user, status='pending')
+        context['outgoing_borrow_requests'] = BorrowEvent.objects.filter(borrower=self.request.user, status='pending')
+        context['request_history'] = BorrowEvent.objects.filter(game__owner=self.request.user).exclude(status='pending')[:5]
+
+        return context
+
+
+# These views are not assigned to particular pages, these are just the controllers for borrow operations
+
+
+def accept_request_view(request):
+    """ when user accepts a request """
+    borrow_request_id = request.POST.get('request')
+    borrow_request = BorrowEvent.objects.filter(id=borrow_request_id).first()
+
+    if request.user != borrow_request.game.owner:
+        messages.info(request, f'You\'re not authorized to accept that request.')
+        return redirect('profile_view')
+
+    borrow_request.status = 'approved'
+    borrow_request.save()
+
+    game = borrow_request.game
+    game.status = 'out'
+    game.checked_out_user = borrow_request.borrower
+    game.checked_out_date = timezone.now()
+    game.save()
+
+    messages.info(request, f'You have accepted {borrow_request.borrower.username}\'s request to borrow {borrow_request.game.game.title}.')
+    return redirect('profile_view')
+
+
+def deny_request_view(request):
+    """ when user denies a request """
+    borrow_request_id = request.POST.get('request')
+    borrow_request = BorrowEvent.objects.filter(id=borrow_request_id).first()
+
+    if request.user != borrow_request.game.owner:
+        messages.info(request, f'You\'re not authorized to deny that request.')
+        return redirect('profile_view')
+
+    borrow_request.status = 'denied'
+    borrow_request.save()
+
+    messages.info(request, f'You have denied {borrow_request.borrower.username}\'s request to borrow {borrow_request.game.game.title}.')
+    return redirect('profile_view')
+
+
+def mark_as_returned_view(request):
+    """ when user marks a game they've loaned as returned """
+    loaned_game_id = request.POST.get('game_id')
+    loaned_game = UserGameCopy.objects.filter(id=loaned_game_id).first()
+
+    if loaned_game.owner != request.user:
+        messages.info(request, f'You are not authorized to mark that game as returned.')
+        return redirect('profile_view')
+
+    borrow_request = BorrowEvent.objects.filter(game=loaned_game).first()
+    borrow_request.status = 'complete'
+    borrow_request.save()
+    loaned_game.status = 'in'
+    loaned_game.save()
+
+    messages.info(request, f'You have marked {loaned_game.game.title} as returned.')
+    return redirect('profile_view')
