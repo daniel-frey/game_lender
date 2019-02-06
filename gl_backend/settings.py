@@ -31,23 +31,16 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 # Application definition
 
 INSTALLED_APPS = [
+    'django_registration',
+    'gl_backend',
+    'gl_library',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'django.contrib.admin',
-    'corsheaders',
-    'allauth',
-    'allauth.account',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'rest_auth.registration',
-    'gl_backend',
-    'gl_auth',
-    'gl_library'
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -151,35 +144,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = (os.path.join(BASE_DIR, 'static'))
 
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 
-# Django REST Framework Settings
+# django registration
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    )
-}
+LOGIN_REDIRECT_URL = '/'
 
+ACCOUNT_ACTIVATION_DAYS = 7
 
-# rest framework auth settings
-
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-
-# rest framework + react cors settings
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ORIGIN_WHITELIST = tuple(
-    os.environ.get(
-        'CORS_ORIGIN_WHITELIST',
-        'localhost',
-    ).split()
-)
-
-SITE_ID = 1
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

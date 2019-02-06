@@ -9,10 +9,11 @@ pep8 = "*"
 [packages]
 django = "*"
 psycopg2-binary = "*"
-djangorestframework = "*"
 django-cors-headers = "*"
-django-rest-auth = "*"
-django-allauth = "*"
+django-registration = "*"
+libsass = "*"
+django-compressor = "*"
+django-sass-processor = "*"
 
 [requires]
 python_version = "3.6"
