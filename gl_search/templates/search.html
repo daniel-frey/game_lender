@@ -6,11 +6,18 @@
   <button type="submit">Search</button>
 </form>
 
-<h1>{{context}}</h1>
-{% for item in context %}
-<h1>{{item.name}}</h1>
-<img src=http:{{loop.index0.cover}}>
-<h2>Rating: {{loop.index0.rating}}</h2>
+{% for game in games.items %}
+  {% for entries in game %}
+  {% if entries and entries.cover or entries.rating %}
+    <h1>{{entries.name}}</h1>
+    {% if entries.cover %}
+      <img src=http:{{entries.cover}}>
+    {% endif %}
+    {% if entries.rating %}
+     <h2>Rating: {{entries.rating}}</h2>
+    {% endif %}
+  {% endif %}
+  {% endfor %}
 {% endfor %}
 
 {% endblock content %}
