@@ -18,5 +18,4 @@
 {% endfor %}
 <p>Share this link to your library:</p>
 <input value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
-
 {% endblock content %}
