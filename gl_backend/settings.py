@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'gl_backend',
     'gl_auth',
+    'gl_search',
 ]
 
 MIDDLEWARE = [
