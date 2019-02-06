@@ -6,8 +6,11 @@
   <button type="submit">Search</button>
 </form>
 
-<h1>{{name}}</h1>
-<img src=http:{{cover}}>
-<h2>Rating: {{rating}}</h2>
+<h1>{{context}}</h1>
+{% for item in context %}
+<h1>{{item.name}}</h1>
+<img src=http:{{loop.index0.cover}}>
+<h2>Rating: {{loop.index0.rating}}</h2>
+{% endfor %}
 
 {% endblock content %}
