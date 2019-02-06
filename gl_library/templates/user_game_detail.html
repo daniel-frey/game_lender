@@ -10,4 +10,8 @@ your
 {% endif %}
 {{ game.game.title }}</h2>
 
+{% if game.owner != user %}
+<a href="{% url 'borrow_confirmation_view' pk=game.id %}">Request to borrow</a>
+{% endif %}
+
 {% endblock content %}
