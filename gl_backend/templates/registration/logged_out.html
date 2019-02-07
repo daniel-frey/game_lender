@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="page-content" class="index-page container">
+  <div class="col-md-8 col-md-offset-2 index-page container">
+    <div id="main-content">
+      <div class="art-header">
+        <p>You have been logged out.</p>
+        <a href="{% url 'home' %}">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

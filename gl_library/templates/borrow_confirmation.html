@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+{% if game.owner == user %}
+<p>You can't borrow your own game. <a href="{% url 'own_game_list_view' %}">Go back to your library</a></p>
+
+{% else %}
+<p>Would you like to make a request to borrow {{ game.game.title }}?</p>
+<form action="{% url 'borrow_confirmation_view' pk=game.id %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" value="{{ game.id }}" name="game">
+  <input type="submit" value="Make Request">
+</form>
+{% endif %}
+
+{% endblock content %}
