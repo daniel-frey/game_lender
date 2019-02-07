@@ -2,9 +2,9 @@
 
 {% block content %}
 <div id="page-content" class="index-page container">
-  <div class="col-md-8 col-md-offset-2 index-page container">
-    <div id="main-content">
-      <div class="art-header">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div id="main-content">
         {% if user == owner %}
         <h1 class="t-center">Your Games</h1>
         {% if messages %}
@@ -18,48 +18,25 @@
       </div>
       {% for game in games %}
       <div class="row">
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-5">
           <div id="main-content">
             <article>
               <div class="art-header">
                 <a href="{% url 'game_detail_view' pk=game.id %}">
                   <h3>{{ game.game.title }}</h3>
                 </a>
-                <div class="info">
-                  By <a href="#">Admin</a> June 12, 2015 - <i class="fa fa-comment"></i> 0 Comments
-                  <ul class="list-inline">
-                    <li>Rating - </li>
-                    <li>
-                      <span class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-
               </div>
               <div class="art-content">
                 <img src="{{ game.game.cover_art }}" />
-                <p>{{ game.game.description }}<a href="single.html">MORE...</a></p>
-                <button type="submit" class="btn btn-skin"><i class="fa fa-check"></i> <span>Add to your library</span></button>
                 <button class="btn btn-skin">Status: {{ game.status }}</button>
-                <p>Share this link to your library:</p>
-                <input value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
-                {% if owner != user %}
-                <a href="{% url 'borrow_confirmation_view' pk=game.id %}">Request to borrow</a>
-                {% endif %}
               </div>
             </article>
             <hr>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </div>
-{% endfor %}
 {% endblock content %}
