@@ -9,5 +9,6 @@ urlpatterns = [
     path('search/', include('gl_search.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('library/', include('gl_library.urls'))
+    path('library/', include('gl_library.urls')),
+    path('messages/', include('gl_messages.urls'))
 ]
