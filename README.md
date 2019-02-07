@@ -11,7 +11,6 @@ Find others in your area that might be willing to let you borrow a game you'd li
 
 #### What technology was used?
 
-- React
 - Python
 - Docker
 - AWS

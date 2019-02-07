@@ -1,0 +1,160 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="page-content" class="single-page container">
+	
+	<div class="row">
+		
+		<div class="col-md-6 col-md-offset-1">
+			<div id="main-content">
+				<article>
+					<div class="art-header">
+						<h2>{{ game.game.title }}</h2>
+						<div class="info">
+							By <a href="#">Admin</a> June 12, 2015 - <i class="fa fa-comment"></i> 0 Comments
+							<ul class="list-inline">
+								<li><a href="#" style="text-decoration: underline;color:#333;">Free</a></li>
+								<li> - </li>
+								<li>
+									<span class="rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+									</span>
+								</li>
+							</ul>
+						</div>
+						<div id="owl-demo1" class="owl-carousel">
+							<div class="item">
+								<img src="images/single-banner.png" />
+							</div>
+							<div class="item">
+								<img src="images/single-banner2.jpg" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-skin"><i class="fa fa-apple"></i> <span>Google Play</span></button>
+						<button type="submit" class="btn btn-skin"><i class="fa fa-android"></i> App Store</button>
+					</div>
+					<div class="art-content">
+						<p style="margin-top: 20px">Aenean feugiat in ante et blandit. Vestibulum posuere molestie risus, ac interdum magna porta non. Pellentesque rutrum fringilla elementum. Curabitur tincidunt porta lorem vitae accumsan. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac euismod turpis.Aenean feugiat in ante et blandit. Vestibulum posuere molestie risus, ac interdum magna porta non. Pellentesque rutrum fringilla elementum. Curabitur tincidunt porta lorem vitae accumsan. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac euismod turpis.</p>
+						<h4>Heading</h4>
+						<p style="margin-top: 20px">Aenean feugiat in ante et blandit. Vestibulum posuere molestie risus, ac interdum magna porta non. Pellentesque rutrum fringilla elementum. Curabitur tincidunt porta lorem vitae accumsan. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac euismod turpis.</p>
+						<hr>
+						<div class="comment">
+							<h3>Leave A Comment</h3>
+							<form name="form1" method="post" action="">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+										<input type="text" class="form-control input-lg" name="name" id="name" placeholder="Enter name" required="required" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="email" class="form-control input-lg" name="email" id="email" placeholder="Enter email" required="required" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea name="message" id="message" class="form-control" rows="4" cols="25" required="required"
+											placeholder="Message"></textarea>
+										</div>						
+										<button type="submit" class="btn btn-4 btn-block" name="btnSend" id="btnSend">Send</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+    
+        <center>
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </center>
+        
+        <div class="col-md-4">
+            <div class="bs-sidebar affix hidden-xs hidden-sm" id="sidebar">
+              <h3>Recent Reviews</h3>
+              <div id="owl-demo1" class="owl-carousel">
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/1.png" %}"/></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/2.png" %}"/></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/7.jpg" %}"/></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/3.png" %}"/></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/4.png" %}"/></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/5.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/6.png" %}" /></a>
+                </div>
+              </div>
+              <h3>New</h3>
+              <div id="owl-demo2" class="owl-carousel">
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/1.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/2.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/7.jpg" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/3.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/4.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/5.png" %}" /></a>
+                </div>
+                <div class="item">
+                  <a href="single.html"><img src="{% static "images/6.png" %}" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+<!-- {% if game.owner == user %}
+your
+{% else %}
+{{ game.owner }}'s
+{% endif %} -->
+
+{% if game.owner != user %}
+<a href="{% url 'borrow_confirmation_view' pk=game.id %}">Request to borrow</a>
+{% endif %}
+
+{% endblock content %}
