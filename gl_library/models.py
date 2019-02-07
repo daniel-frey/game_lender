@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
+class Platform(models.Model):
+    """ this is just a k:v storage of platform id:platform string """
+    igdb_platform_id = models.IntegerField()
+    platform_name = models.CharField(max_length=96)
+
+
 class Game(models.Model):
     """ this is the data saved about a particular game - cover art, name,
     etc. not unique to a user's specific copy of a game.
@@ -16,7 +22,16 @@ class Game(models.Model):
     game_id = models.IntegerField(null=True)
     title = models.CharField(max_length=96, null=True)
     cover_art = models.CharField(max_length=1028, null=True)
-    rating = models.FloatField(null=True)
+    description = models.TextField(null=True)
+
+    platform = models.ForeignKey(
+        Platform,
+        on_delete=models.CASCADE,
+        related_name='game_platform',
+        null=True
+    )
+
+    aggregate_rating = models.FloatField(null=True)
 
     def __str__(self):
         return f'Game: {self.title}'
@@ -114,3 +129,30 @@ class BorrowEvent(models.Model):
 
     def __str__(self):
         return f'Borrow Event: {self.borrower} borrows {self.lender}\'s {self.game.game.title}'
+
+
+class Message(models.Model):
+    """ model for a message from a user to another user """
+
+    from_user = models.ForeignKey(
+        User,
+        on_delete=models.SET_DEFAULT,
+        related_name='message_from',
+        null=True,
+        default=None
+    )
+
+    to_user = models.ForeignKey(
+        User,
+        on_delete=models.SET_DEFAULT,
+        related_name='message_to',
+        null=True,
+        default=None
+    )
+
+    subject = models.CharField(max_length=1028)
+    body = models.TextField()
+
+    sent_date = models.DateTimeField(default=timezone.now)
+
+    read = models.BooleanField(default=False)
