@@ -10,6 +10,9 @@
   {% for entries in game %}
   {% if entries and entries.cover or entries.rating %}
     <h1>{{entries.name}}</h1>
+    {% if entries.summary %}
+      <p>{{entries.summary}}</p>
+      {% endif %}
     {% if entries.cover %}
       <img src=http:{{entries.cover}}>
     {% endif %}

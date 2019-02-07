@@ -21,11 +21,12 @@ def search_view(request):
             for i in range(len(data)):
                 if i > 5:
                     break
-                payload = f'fields name, cover.url, rating; where id = {data[i]["id"]};'
+                payload = f'fields name, summary, platforms, cover.url, rating; where id = {data[i]["id"]};'
                 req = requests.request("GET", url, data=payload, headers=headers)
                 api_data = req.json()
                 context_dict[i] = {
                     'name': api_data[0]['name'],
+                    'summary': api_data[0]['summary'],
                     'cover': api_data[0].get('cover', {}).get('url'),
                     'rating': api_data[0].get('rating'),
                 }
