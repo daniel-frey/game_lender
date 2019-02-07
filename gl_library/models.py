@@ -14,9 +14,10 @@ class Game(models.Model):
     etc. not unique to a user's specific copy of a game.
 
     game_id
-    name
+    title
+    description
     cover_art
-    rating
+    aggregate_rating
     """
 
     game_id = models.IntegerField(null=True)
@@ -129,30 +130,3 @@ class BorrowEvent(models.Model):
 
     def __str__(self):
         return f'Borrow Event: {self.borrower} borrows {self.lender}\'s {self.game.game.title}'
-
-
-class Message(models.Model):
-    """ model for a message from a user to another user """
-
-    from_user = models.ForeignKey(
-        User,
-        on_delete=models.SET_DEFAULT,
-        related_name='message_from',
-        null=True,
-        default=None
-    )
-
-    to_user = models.ForeignKey(
-        User,
-        on_delete=models.SET_DEFAULT,
-        related_name='message_to',
-        null=True,
-        default=None
-    )
-
-    subject = models.CharField(max_length=1028)
-    body = models.TextField()
-
-    sent_date = models.DateTimeField(default=timezone.now)
-
-    read = models.BooleanField(default=False)
