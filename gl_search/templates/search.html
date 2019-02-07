@@ -1,0 +1,23 @@
+{% block title %}Search{% endblock title %}
+{% block content %}
+<div class="game_search">
+<form method="get">
+  <input type="text" name="name">
+  <button type="submit">Search</button>
+</form>
+
+{% for game in games.items %}
+  {% for entries in game %}
+  {% if entries and entries.cover or entries.rating %}
+    <h1>{{entries.name}}</h1>
+    {% if entries.cover %}
+      <img src=http:{{entries.cover}}>
+    {% endif %}
+    {% if entries.rating %}
+     <h2>Rating: {{entries.rating}}</h2>
+    {% endif %}
+  {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% endblock content %}

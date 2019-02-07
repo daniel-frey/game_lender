@@ -30,5 +30,6 @@ Django = "==2.1.5"
 django_compressor = "==2.2"
 confusable_homoglyphs = "==3.2.0"
 
+
 [requires]
 python_version = "3.6"
