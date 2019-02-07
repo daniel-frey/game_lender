@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'gl_backend',
     'gl_library',
     'gl_search',
+    'gl_messages',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
