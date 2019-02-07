@@ -53,24 +53,23 @@ def search_view(request):
                     api_data = req.json()
 
                     if api_data[0].get('platforms'):
-                        for i in range(len(api_data[0].get('platforms'))):
-                            platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][i]).first()
+                        for j in range(len(api_data[0].get('platforms'))):
+                            platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][j]).first()
                             if not platform:
-                                platform_payload = f'fields name; where id = {api_data[0]["platforms"][i]};'
+                                platform_payload = f'fields name; where id = {api_data[0]["platforms"][j]};'
                                 new_platform = requests.request("GET", platforms_url, data=platform_payload, headers=headers)
                                 platform_data = new_platform.json()
 
                                 new_db_platform = Platform()
-                                new_db_platform.igdb_platform_id = api_data[0]['platforms'][i]
+                                new_db_platform.igdb_platform_id = api_data[0]['platforms'][j]
                                 new_db_platform.platform_name = platform_data[0].get('name')
                                 new_db_platform.save()
 
                         platforms = []
-                        for i in range(len(api_data[0].get('platforms'))):
-                            game_platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][i]).first()
+                        for k in range(len(api_data[0].get('platforms'))):
+                            game_platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][k]).first()
                             platforms.append(game_platform.platform_name)
 
-                    print(platforms)
                     context_dict[i] = {
                         'name': api_data[0].get('name'),
                         'summary': api_data[0].get('summary'),
@@ -87,7 +86,6 @@ def search_view(request):
                     game.save()
 
             context = {'games': context_dict}
-            print(context)
             return render(request, 'search.html', context)
 
     return render(request, 'search.html')
