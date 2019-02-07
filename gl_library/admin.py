@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Game, UserGameCopy
+from .models import Game, UserGameCopy, BorrowEvent
 
-admin.site.register((Game, UserGameCopy))
+admin.site.register((Game, UserGameCopy, BorrowEvent))

@@ -13,10 +13,10 @@ class Game(models.Model):
     rating
     """
 
-    game_id = models.IntegerField()
-    title = models.CharField(max_length=96)
-    cover_art = models.CharField(max_length=1028)
-    rating = models.FloatField()
+    game_id = models.IntegerField(null=True)
+    title = models.CharField(max_length=96, null=True)
+    cover_art = models.CharField(max_length=1028, null=True)
+    rating = models.FloatField(null=True)
 
     def __str__(self):
         return f'Game: {self.title}'
@@ -36,12 +36,14 @@ class UserGameCopy(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='game_statuses_owner',
+        null=True
     )
 
     game = models.ForeignKey(
         Game,
         on_delete=models.CASCADE,
-        related_name='game_statuses_game'
+        related_name='game_statuses_game',
+        null=True
     )
 
     statuses = [
@@ -61,7 +63,7 @@ class UserGameCopy(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='game_statuses_checkout_user',
-        default='hello'
+        null=True
     )
 
     def __str__(self):
@@ -69,4 +71,46 @@ class UserGameCopy(models.Model):
 
 
 class BorrowEvent(models.Model):
-    pass
+    """ model for an event of a user making a borrow request
+
+    game (reference to UserGameCopy model)
+    borrower (reference to User model)
+    request_date
+    status
+    """
+
+    game = models.ForeignKey(
+        UserGameCopy,
+        on_delete=models.CASCADE,
+        related_name='borrowed_game',
+        null=True
+    )
+
+    borrower = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='game_borrower',
+        null=True
+    )
+
+    request_date = models.DateTimeField(default=timezone.now)
+
+    statuses = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('denied', 'Denied'),
+        ('complete', 'Complete')
+    ]
+
+    status = models.CharField(
+        max_length=96,
+        choices=statuses,
+        default='pending'
+    )
+
+    @property
+    def lender(self):
+        return self.game.owner
+
+    def __str__(self):
+        return f'Borrow Event: {self.borrower} borrows {self.lender}\'s {self.game.game.title}'
