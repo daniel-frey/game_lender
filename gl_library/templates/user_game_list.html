@@ -9,9 +9,13 @@
         <h1 class="t-center">Your Games</h1>
         {% if messages %}
         {% for message in messages %}
-        <div>{{ message }}</div>
+          <div>{{ message }}</div>
         {% endfor %}
         {% endif %}
+
+        <p>Share this link to your library:</p>
+        <input value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
+
         {% else %}
         <h2>{{ owner.username }}'s games</h2>
         {% endif %}
@@ -30,9 +34,6 @@
                 <img src="{{ game.game.cover_art }}" />
                 <p>{{ game.platform.platform_name }}</p>
                 <button class="btn btn-skin" style="display:block;">Status: {{ game.status }}</button>
-                {% if user != owner %}
-                <a href="{% url 'send_message_view' %}">Message user</a>
-                {% endif %}
               </div>
             </article>
             <hr>
