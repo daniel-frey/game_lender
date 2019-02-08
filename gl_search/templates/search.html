@@ -46,7 +46,9 @@
                     {% if game.users %}
                     <h3 style="font-size:1.2em;">Borrow from another user</h3>
                     {% for usercopy in game.users %}
-                      <a href="" class="btn btn-skin">{{usercopy.owner}}</a>
+                      {% if usercopy.owner != user %}
+                      <a href="{% url 'game_detail_view' pk=usercopy.id %}" class="btn btn-skin">{{usercopy.owner}}</a>
+                      {% endif %}
                     {% endfor %}
 
                     {% endif %}
