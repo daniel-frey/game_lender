@@ -75,10 +75,6 @@ hr{border-color: #aaa;}
 	background: #ECECEC;
 }
 
-#search {
-	border-right: none !important;
-}
-
 #nav {font-family: Asap;}
 #nav > .navbar-inner {border-left: 0;border-right: 0;border-radius: 0;-webkit-border-radius: 0;-moz-border-radius: 0;-o-border-radius: 0;}
 #nav.affix {position: fixed;top: 0;width: 100%}
@@ -136,6 +132,10 @@ ul.pagination li a:hover{background-color: rgb(26, 137, 211);color: #fff;border:
 .bs-sidebar.affix {top: 42px;}
 .bs-sidebar .bottom-sidebar{position:absolute; bottom:0;padding:15px 0 15px 25px;border-top: 1px solid #aaa;width: 100%;}
 
+.border {
+    border: 2px solid rgb(26, 137, 211) !important;
+    border-radius: 6px !important;
+}
 
 #tabs {
     position: relative;

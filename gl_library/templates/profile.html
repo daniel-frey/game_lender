@@ -56,7 +56,7 @@
                   <form method="POST" action="{% url 'mark_as_returned_view' %}">
                     {% csrf_token %}
                     <input type="hidden" value="{{ game.id }}" name="game_id">
-                    <input type="submit" value="Mark as returned">
+                    <input class="btn btn-skin" type="submit" value="Mark as returned">
                   </form>
                   {% endfor %}
                 </ul>
@@ -68,12 +68,12 @@
                   <form method="POST" action="{% url 'accept_request_view' %}">
                     {% csrf_token %}
                     <input type="hidden" value="{{ request.id }}" name="request">
-                    <input type="submit" value="Accept Request">
+                    <input type="submit" class="btn btn-skin" value="Accept Request">
                   </form>
                   <form method="POST" action="{% url 'deny_request_view' %}">
                     {% csrf_token %}
                     <input type="hidden" value="{{ request.id }}" name="request">
-                    <input type="submit" value="Deny Request">
+                    <input type="submit" class="btn btn-skin" value="Deny Request">
                   </form>
                 </li>
                 {% endfor %}

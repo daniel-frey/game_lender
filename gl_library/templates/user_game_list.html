@@ -14,7 +14,7 @@
         {% endif %}
 
         <p>Share this link to your library:</p>
-        <input value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
+        <input class="border" value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
 
         {% else %}
         <h2>{{ owner.username }}'s games</h2>
@@ -31,7 +31,7 @@
                 </a>
               </div>
               <div class="art-content">
-                <img src="{{ game.game.cover_art }}" />
+                <img class="border" src="{{ game.game.cover_art }}" />
                 <p>{{ game.platform.platform_name }}</p>
                 <button class="btn btn-skin" style="display:block;">Status: {{ game.status }}</button>
               </div>

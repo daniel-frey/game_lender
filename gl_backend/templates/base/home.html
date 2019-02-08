@@ -12,7 +12,7 @@
 
         </div>
         <div class="art-content">
-          <img src="{{ random_game.game.cover_art }}" />
+          <img class="border" src="{{ random_game.game.cover_art }}" />
           <p>{{ random_game.game.description|truncatechars:150 }}</p>
         <a href="{% url 'game_detail_view' pk=random_game.id %}" class="btn btn-skin">More Details</a>
         </div>
@@ -32,7 +32,7 @@
 
         {% for game in recent_games %}
           <div class="item">
-            <a href="{% url 'game_detail_view' pk=game.id %}"><img src="{{ game.game.cover_art }}" /></a>
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img class="border" src="{{ game.game.cover_art }}" /></a>
           </div>
         {% endfor %}
 
@@ -44,7 +44,7 @@
 
         {% for game in other_random_games %}
           <div class="item">
-            <a href="{% url 'game_detail_view' pk=game.id %}"><img src="{{ game.game.cover_art }}" /></a>
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img class="border" src="{{ game.game.cover_art }}" /></a>
           </div>
         {% endfor %}
 
