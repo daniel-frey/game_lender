@@ -29,14 +29,12 @@ def search_view(request):
 
         if data:
             context_dict = {}
-            print('data length:', len(data))
             for i in range(len(data)):
                 if i > 4:
                     break
 
                 new_game = Game.objects.filter(game_id=data[i]["id"]).first()
                 if new_game:
-                    print(new_game.title)
                     context_dict[i] = new_game
 
                 else:
@@ -87,9 +85,6 @@ def search_view(request):
     return render(request, 'search.html')
 
 
-# def add_game_view(self):
-
-
 class AddGameView(LoginRequiredMixin, FormView):
     """
     POST /search/addgame/
@@ -107,11 +102,11 @@ class AddGameView(LoginRequiredMixin, FormView):
         platform_id = request.POST['platforms']
         platform = Platform.objects.filter(igdb_platform_id=platform_id).first()
 
-        existing_game = UserGameCopy.objects.get(
+        existing_game = UserGameCopy.objects.filter(
             owner=request.user,
             game=game,
             platform=platform
-        )
+        ).first()
 
         if existing_game:
             messages.info(self.request, 'That game is already in your library')
