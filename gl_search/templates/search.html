@@ -32,13 +32,13 @@
                     {% csrf_token %}
                     <label for="plaforms">Platform</label>
                     <input type="hidden" value="{{ game.id }}" name="game_id" value="game_id">
-                    <select name="platforms" required>
+                    <select class="btn-skin" name="platforms" required>
                       {% for platform in game.platforms.all %}
                       {{ platform }}
                         <option value="{{ platform.igdb_platform_id }}">{{ platform.platform_name }}</option>
                       {% endfor %}
                     </select>
-                    <input type="submit" value="Add to library">
+                    <input class="btn btn-skin" type="submit" value="Add to library">
                     </form>
                   {% endif %}
                 {% endfor %}
