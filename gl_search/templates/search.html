@@ -6,8 +6,8 @@
     <div class="col-md-6 col-md-offset-1">
       <div id="main-content">
 
-        {% if games.items|length == 0 %}
         <div class="game_search">
+        {% if games.items|length == 0 %}
           <form method="get" action="{% url 'search_view' %}">
             <input type="text" name="name">
             <button type="submit">Search</button>
