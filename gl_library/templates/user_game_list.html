@@ -30,7 +30,9 @@
                 <img src="{{ game.game.cover_art }}" />
                 <p>{{ game.platform.platform_name }}</p>
                 <button class="btn btn-skin" style="display:block;">Status: {{ game.status }}</button>
-                <a href="{% url 'send_message_view' %}">Message user</a>              
+                {% if user != owner %}
+                <a href="{% url 'send_message_view' %}">Message user</a>
+                {% endif %}
               </div>
             </article>
             <hr>
