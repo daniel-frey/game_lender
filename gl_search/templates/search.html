@@ -5,27 +5,47 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-1">
       <div id="main-content">
+
+        {% if games.items|length == 0 %}
         <div class="game_search">
-          <form method="get">
+          <form method="get" action="{% url 'search_view' %}">
             <input type="text" name="name">
             <button type="submit">Search</button>
           </form>
-          {% for game in games.items %}
-          {% for entries in game %}
-          {% if entries and entries.cover or entries.rating %}
-          <h1>{{entries.name}}</h1>
-          {% if entries.summary %}
-          <p>{{entries.summary}}</p>
-          {% endif %}
-          {% if entries.cover %}
-          <img src=http:{{entries.cover}}>
-          {% endif %}
-          {% if entries.rating %}
-          <h2>Rating: {{entries.rating}}</h2>
-          {% endif %}
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
+
+          {% else %}
+            {% for game_outer in games.items %}
+              {% for game in game_outer %}
+                  {% if game.title and game.platforms.all|length > 0 %}
+                    <h1>{{game.title}}</h1>
+                    {% if game.description %}
+                      <p>{{game.description}}</p>
+                    {% endif %}
+                    {% if game.cover_art %}
+                      <img src=http:{{game.cover_art}}>
+                    {% endif %}
+                    {% if game.aggregate_rating %}
+                      <h2>Rating: {{game.aggregate_rating}}</h2>
+                    {% endif %}
+
+                    <form action="{% url 'add_game_view' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="plaforms">Platform</label>
+                    <input type="hidden" value="{{ game.id }}" name="game_id" value="game_id">
+                    <select name="platforms" required>
+                      {% for platform in game.platforms.all %}
+                      {{ platform }}
+                        <option value="{{ platform.igdb_platform_id }}">{{ platform.platform_name }}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="submit" value="Add to library">
+                    </form>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+
+              {% endif %}
+          </div>
         </div>
       </div>
     </div>
