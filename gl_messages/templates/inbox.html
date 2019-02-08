@@ -15,28 +15,26 @@
         {% if user_messages|length == 0 %}
         <p>You have no messages. Send some, and maybe you'll get some responses.</p>
         {% else %}
-        <table>
-          <thead>
-            <th>From</th>
-            <th>Subject</th>
-            <th>Received</th>
-          </thead>
-          {% for message in user_messages %}
-          <tr>
-            <td>{{ message.from_user.username }}</td>
-            {% if message.read == True %}
-            <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-style:italic;">{{ message.subject
-                }}</a></td>
-            {% else %}
-            <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-weight:900;">{{ message.subject }}
-                (new)</a></td>
-            {% endif %}
-            <td>{{ message.sent_date }}</td>
-          </tr>
-          {% endfor %}
-        </table>
+          <table>
+            <thead>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Received</th>
+            </thead>
+            {% for message in user_messages %}
+            <tr>
+              <td>{{ message.from_user.username }}</td>
+              {% if message.read == True %}
+              <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-style:italic;">{{ message.subject }}</a></td>
+              {% else %}
+              <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-weight:900;">{{ message.subject }} (new)</a></td>
+              {% endif %}
+              <td>{{ message.sent_date }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         {% endif %}
-      </div>
+        </div>
     </div>
   </div>
 </div>
