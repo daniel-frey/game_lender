@@ -13,7 +13,7 @@
         <form action="{% url 'borrow_confirmation_view' pk=game.id %}" method="POST">
           {% csrf_token %}
           <input type="hidden" value="{{ game.id }}" name="game">
-          <input type="submit" value="Make Request">
+          <input type="submit" value="Make Request" class="btn btn-skin">
         </form>
         {% endif %}
       </div>
