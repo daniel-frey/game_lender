@@ -12,6 +12,8 @@
         {% endfor %}
         {% endif %}
 
+        <a href="{% url 'send_message_view' %}" class="btn btn-skin">Send a Message</a>
+
         {% if user_messages|length == 0 %}
         <p>You have no messages. Send some, and maybe you'll get some responses.</p>
         {% else %}
