@@ -79,7 +79,7 @@ class BorrowConfirmation(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         game = get_object_or_404(UserGameCopy, id=self.kwargs.get('pk'))
-        if BorrowEvent.objects.filter(borrower=request.user, status='pending').first():
+        if BorrowEvent.objects.filter(borrower=request.user, status='pending', game=game).first():
             messages.info(request, f'You\'ve already requested to borrow this game.')
             return redirect('own_game_list_view')
 
