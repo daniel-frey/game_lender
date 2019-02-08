@@ -7,6 +7,12 @@
       <div id="main-content">
         <h2>Your Profile</h2>
         {% if messages %}
+        {% for message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        {% if user_messages %}
         <h3>Messages</h3>
         <table>
             <thead>
@@ -14,7 +20,7 @@
               <th>Subject</th>
               <th>Received</th>
             </thead>
-            {% for message in messages %}
+            {% for message in user_messages %}
             <tr>
               <td>{{ message.from_user.username }}</td>
               {% if message.read == True %}
@@ -94,9 +100,9 @@
         tab.addEventListener('click', function() {
             var activeTab = document.getElementById('tab-'+current).classList.remove('active');
             var activeContent = document.getElementById('tab-content-'+current).classList.remove('active');
-            
+
             current = parseInt(this.id.replace(/\D/g,''));
-            
+
             activeTab = document.getElementById('tab-'+current).classList.add('active');
             activeContent = document.getElementById('tab-content-'+current).classList.add('active');
         });
