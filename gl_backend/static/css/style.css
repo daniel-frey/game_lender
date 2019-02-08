@@ -65,6 +65,14 @@ hr{border-color: #aaa;}
 .top {background-color: rgb(26, 137, 211);color: white;font-family: Asap;min-height: 138px;max-height: 139px;}
 .toplogo {display: block;margin: 20px auto;}
 
+#search-nav #search {
+	border-color: #ECECEC;
+	background: #ECECEC;
+}
+
+#search {
+	border-right: none !important;
+}
 
 #nav {font-family: Asap;}
 #nav > .navbar-inner {border-left: 0;border-right: 0;border-radius: 0;-webkit-border-radius: 0;-moz-border-radius: 0;-o-border-radius: 0;}
