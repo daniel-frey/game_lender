@@ -139,7 +139,7 @@ ul.pagination li a:hover{background-color: rgb(26, 137, 211);color: #fff;border:
 	min-height: 451px;
 	max-height: 452px;
   }
-  
+
   .bs-sidebar.affix {
 	min-width: 304px;
 	max-width: 305px;
@@ -151,7 +151,7 @@ ul.pagination li a:hover{background-color: rgb(26, 137, 211);color: #fff;border:
 
 @media (min-width: 1200px) {
   .bs-sidebar {
-    
+
 	min-width: 370px;
 	max-width: 371px;
     min-height: 495px;
@@ -164,8 +164,8 @@ ul.pagination li a:hover{background-color: rgb(26, 137, 211);color: #fff;border:
 	max-height: 496px;
   }
 }
-	
-	
+
+
 footer {
 	background-color: #29282E;
 	color: white;
@@ -202,7 +202,7 @@ footer ul.social-buttons li a i{margin-top: 7px;}
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	font-weight: 400;	
+	font-weight: 400;
 	text-shadow: 0 0 1px rgba(255,255,255,0.3);
 	font-size: 14px;
 }
@@ -211,4 +211,52 @@ a.btn:focus{outline: 0;}
 .btn-skin {color: rgb(26, 137, 211);background-color: transparent;border: 1px solid rgb(26, 137, 211);padding: 7px 25px;line-height: 26px;font-weight: bold;}
 .btn-skin:hover {color: #fff;background-color: rgb(26, 137, 211);}
 
- 
+
+#page-content {
+    padding-bottom: 3em;
+}
+
+
+
+#search-nav,
+#form-group {
+    display: inline;
+}
+
+#searchButton {
+    display: inline;
+}
+
+#searchButton .btn {
+    height: 30px;
+    top: -3px;
+}
+
+#search {
+    height: 30px;
+}
+
+
+@media(max-width: 767px) {
+    #search-nav #search {
+        display: inline;
+        width: calc(100% - 45px);
+    }
+}
+
+@media(min-width: 768px) {
+    #search-nav #search {
+        display: inline;
+        max-width: 200px;
+    }
+
+    #searchButton {
+        display: inline;
+    }
+
+    #game-search,
+    .form-group {
+        display: inline;
+        max-width: 500px;
+    }
+}
