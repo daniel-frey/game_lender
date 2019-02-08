@@ -6,13 +6,14 @@
   <div class="col-md-6 col-md-offset-1">
     <div id="main-content">
       <article>
+        <p style="font-size: 1.3em;">Welcome to Game Lender. Create an account and start searching for and adding games to your library, and once you’ve filled it out, you can request to borrow games from other users. Watch your messages to see whether other users are looking to borrow your games!</p>
         <div class="art-header">
           <a href="{% url 'game_detail_view' pk=random_game.id %}"><h2>{{ random_game.game.title }}</h2></a>
 
         </div>
         <div class="art-content">
           <img src="{{ random_game.game.cover_art }}" />
-          <p>{{ random_game.game.description }}</p>
+          <p>{{ random_game.game.description|truncatechars:150 }}</p>
         <a href="{% url 'game_detail_view' pk=random_game.id %}" class="btn btn-skin">More Details</a>
         </div>
       </article>
