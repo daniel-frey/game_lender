@@ -35,7 +35,10 @@ def search_view(request):
 
                 new_game = Game.objects.filter(game_id=data[i]["id"]).first()
                 if new_game:
-                    context_dict[i] = new_game
+
+                    users_with_game = UserGameCopy.objects.filter(game=new_game)[:3]
+
+                    context_dict[i] = {'game': new_game, 'users': users_with_game}
 
                 else:
                     game_payload = f'''fields name,
@@ -77,9 +80,11 @@ def search_view(request):
                             game_platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][k]).first()
                             game.platforms.add(game_platform)
 
-                    context_dict[i] = game
+                    context_dict[i] = {'game': game}
 
-            context = {'games': context_dict}
+            context = {
+                'games': context_dict
+            }
             return render(request, 'search.html', context)
 
     return render(request, 'search.html')

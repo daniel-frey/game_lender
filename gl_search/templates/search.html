@@ -16,30 +16,42 @@
           {% else %}
             {% for game_outer in games.items %}
               {% for game in game_outer %}
-                  {% if game.title and game.platforms.all|length > 0 %}
-                    <h1>{{game.title}}</h1>
-                    {% if game.description %}
-                      <p>{{game.description}}</p>
+                  {% if game.game.title and game.game.platforms.all|length > 0 %}
+                    <h1>{{game.game.title}}</h1>
+                    {% if game.game.description %}
+                      <p>{{game.game.description}}</p>
                     {% endif %}
-                    {% if game.cover_art %}
-                      <img src=http:{{game.cover_art}}>
+                    {% if game.game.cover_art %}
+                      <img src=http:{{game.game.cover_art}}>
                     {% endif %}
-                    {% if game.aggregate_rating %}
-                      <h2>Rating: {{game.aggregate_rating|floatformat:0}}/100</h2>
-                    {% endif %} 
+                    {% if game.game.aggregate_rating %}
+                      <h2>Rating: {{game.game.aggregate_rating|floatformat:0}}/100</h2>
+                    {% endif %}
 
+
+
+                    <h3 style="font-size:1.2em;">Add to your library</h3>
                     <form action="{% url 'add_game_view' %}" method="POST">
                     {% csrf_token %}
-                    <label for="plaforms">Platform</label>
-                    <input type="hidden" value="{{ game.id }}" name="game_id" value="game_id">
-                    <select class="btn-skin" name="platforms" required>
-                      {% for platform in game.platforms.all %}
+                    <input type="hidden" value="{{ game.game.id }}" name="game_id" value="game_id">
+                    <select class="btn-skin" name="platforms" style="display: inline; width: 65%;" required>
+                      {% for platform in game.game.platforms.all %}
                       {{ platform }}
                         <option value="{{ platform.igdb_platform_id }}">{{ platform.platform_name }}</option>
                       {% endfor %}
                     </select>
                     <input class="btn btn-skin" type="submit" value="Add to library">
                     </form>
+
+                    {% if game.users %}
+                    <h3 style="font-size:1.2em;">Borrow from another user</h3>
+                    {% for usercopy in game.users %}
+                      <a href="" class="btn btn-skin">{{usercopy.owner}}</a>
+                    {% endfor %}
+
+                    {% endif %}
+
+
                   {% endif %}
                 {% endfor %}
               {% endfor %}
