@@ -6,10 +6,6 @@
     <div class="col-md-6 col-md-offset-1">
       <div id="main-content">
         <div class="game_search">
-          <form method="get">
-            <input type="text" name="name">
-            <button type="submit">Search</button>
-          </form>
           {% for game in games.items %}
           {% for entries in game %}
           {% if entries and entries.cover or entries.rating %}
