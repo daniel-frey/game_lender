@@ -1,11 +1,19 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<h2>Subject: {{ user_message.subject }}</h2>
-<p>To {{ user_message.to_user.username }}</p>
-<p>From {{ user_message.from_user.username }}</p>
-<p>Received {{ user_message.sent_date }}</p>
-<h3>Body</h3>
-<p>{{ user_message.body }}</p>
-<a href="{% url 'reply_message_view' pk=message.id %}" class="btn btn-skin">Reply</a>
+<div id="page-content" class="index-page container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div id="main-content">
+      <h2>Subject: {{ user_message.subject }}</h2>
+      <p>To {{ user_message.to_user.username }}</p>
+      <p>From {{ user_message.from_user.username }}</p>
+      <p>Received {{ user_message.sent_date }}</p>
+      <h3>Body</h3>
+      <p>{{ user_message.body }}</p>
+      <a href="{% url 'reply_message_view' pk=message.id %}" class="btn btn-skin">Reply</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

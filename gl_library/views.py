@@ -17,6 +17,7 @@ from django.shortcuts import (
 )
 
 from .models import Game, UserGameCopy, BorrowEvent
+from gl_messages.models import Message
 
 
 class UserGameCopyList(LoginRequiredMixin, ListView):
@@ -112,6 +113,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context['incoming_borrow_requests'] = BorrowEvent.objects.filter(game__owner=self.request.user, status='pending')
         context['outgoing_borrow_requests'] = BorrowEvent.objects.filter(borrower=self.request.user, status='pending')
         context['request_history'] = BorrowEvent.objects.filter(game__owner=self.request.user).exclude(status='pending')[:5]
+        context['messages'] = Message.objects.filter(to_user__id=self.request.user.id)[:5]
 
         return context
 
