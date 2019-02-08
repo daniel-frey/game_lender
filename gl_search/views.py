@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 import requests
 import os
 import json
 
-from gl_library.models import Game, Platform
+from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from gl_library.models import Game, Platform, UserGameCopy
+
+from .forms import AddGameForm
 
 
 def search_view(request):
@@ -30,12 +37,7 @@ def search_view(request):
                 new_game = Game.objects.filter(game_id=data[i]["id"]).first()
                 if new_game:
                     print(new_game.title)
-                    context_dict[i] = {
-                        'name': new_game.title,
-                        'summary': new_game.description,
-                        'cover': new_game.cover_art,
-                        'rating': new_game.aggregate_rating,
-                    }
+                    context_dict[i] = new_game
 
                 else:
                     game_payload = f'''fields name,
@@ -52,31 +54,6 @@ def search_view(request):
 
                     api_data = req.json()
 
-                    if api_data[0].get('platforms'):
-                        for j in range(len(api_data[0].get('platforms'))):
-                            platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][j]).first()
-                            if not platform:
-                                platform_payload = f'fields name; where id = {api_data[0]["platforms"][j]};'
-                                new_platform = requests.request("GET", platforms_url, data=platform_payload, headers=headers)
-                                platform_data = new_platform.json()
-
-                                new_db_platform = Platform()
-                                new_db_platform.igdb_platform_id = api_data[0]['platforms'][j]
-                                new_db_platform.platform_name = platform_data[0].get('name')
-                                new_db_platform.save()
-
-                        platforms = []
-                        for k in range(len(api_data[0].get('platforms'))):
-                            game_platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][k]).first()
-                            platforms.append(game_platform.platform_name)
-
-                    context_dict[i] = {
-                        'name': api_data[0].get('name'),
-                        'summary': api_data[0].get('summary'),
-                        'cover': api_data[0].get('cover', {}).get('url'),
-                        'rating': api_data[0].get('rating'),
-                    }
-
                     game = Game()
                     game.game_id = data[i]['id']
                     game.title = api_data[0].get('name')
@@ -85,7 +62,68 @@ def search_view(request):
                     game.aggregate_rating = api_data[0].get('rating')
                     game.save()
 
+                    if api_data[0].get('platforms'):
+                        for j in range(len(api_data[0].get('platforms'))):
+                            platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][j]).first()
+                            if not platform:
+                                platform_payload = f'fields name; where id = {api_data[0]["platforms"][j]};'
+                                new_platform = requests.request("GET", platforms_url, data=platform_payload, headers=headers)
+                                platform_data = new_platform.json()
+
+                                platform = Platform()
+                                platform.igdb_platform_id = api_data[0]['platforms'][j]
+                                platform.platform_name = platform_data[0].get('name')
+                                platform.save()
+
+                        for k in range(len(api_data[0].get('platforms'))):
+                            game_platform = Platform.objects.filter(igdb_platform_id=api_data[0]['platforms'][k]).first()
+                            game.platforms.add(game_platform)
+
+                    context_dict[i] = game
+
             context = {'games': context_dict}
             return render(request, 'search.html', context)
 
     return render(request, 'search.html')
+
+
+# def add_game_view(self):
+
+
+class AddGameView(LoginRequiredMixin, FormView):
+    """
+    POST /search/addgame/
+        add game with game id and platform
+    """
+
+    template_name = 'search.html'
+    form_class = AddGameForm
+    login_url = reverse_lazy('login')
+    success_url = reverse_lazy('game_list_view')
+
+    def post(self, request, *args, **kwargs):
+        game_id = request.POST['game_id']
+        game = Game.objects.filter(id=game_id).first()
+        platform_id = request.POST['platforms']
+        platform = Platform.objects.filter(igdb_platform_id=platform_id).first()
+
+        existing_game = UserGameCopy.objects.get(
+            owner=request.user,
+            game=game,
+            platform=platform
+        )
+
+        if existing_game:
+            messages.info(self.request, 'That game is already in your library')
+            return redirect('own_game_list_view')
+
+        game_copy = UserGameCopy(
+            owner=request.user,
+            game=game,
+            platform=platform,
+            checked_out_user=request.user
+        )
+        game_copy.save()
+
+        messages.info(self.request, 'Added to your library!')
+        return redirect('own_game_list_view')

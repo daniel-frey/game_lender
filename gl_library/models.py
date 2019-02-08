@@ -8,6 +8,9 @@ class Platform(models.Model):
     igdb_platform_id = models.IntegerField()
     platform_name = models.CharField(max_length=96)
 
+    def __str__(self):
+        return f'{self.platform_name} ({self.igdb_platform_id})'
+
 
 class Game(models.Model):
     """ this is the data saved about a particular game - cover art, name,
@@ -25,12 +28,7 @@ class Game(models.Model):
     cover_art = models.CharField(max_length=1028, null=True)
     description = models.TextField(null=True)
 
-    platform = models.ForeignKey(
-        Platform,
-        on_delete=models.CASCADE,
-        related_name='game_platform',
-        null=True
-    )
+    platforms = models.ManyToManyField(Platform)
 
     aggregate_rating = models.FloatField(null=True)
 
@@ -59,6 +57,13 @@ class UserGameCopy(models.Model):
         Game,
         on_delete=models.CASCADE,
         related_name='game_statuses_game',
+        null=True
+    )
+
+    platform = models.ForeignKey(
+        Platform,
+        on_delete=models.CASCADE,
+        related_name='game_statuses_platform',
         null=True
     )
 
