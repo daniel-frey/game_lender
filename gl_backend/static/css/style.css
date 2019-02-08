@@ -48,6 +48,11 @@ input:not([type]), input[type="color"], input[type="email"], input[type="number"
     border: 2px solid #444444;
 }
 
+.item-b {
+	filter: blur(4px);
+}
+
+
 .f-right{float: right;}
 .f-left{float: left;}
 .t-center{text-align: center; margin: 0 auto;}
@@ -63,7 +68,7 @@ input:not([type]), input[type="color"], input[type="email"], input[type="number"
 hr{border-color: #aaa;}
 
 .top {background-color: rgb(26, 137, 211);color: white;font-family: Asap;min-height: 138px;max-height: 139px;}
-.toplogo {display: block;margin: 20px auto;}
+.toplogo {display: block;margin: 20px auto; height: 100px;}
 
 #search-nav #search {
 	border-color: #ECECEC;
