@@ -7,87 +7,49 @@
     <div id="main-content">
       <article>
         <div class="art-header">
-          <a href="xx"><h2>{{ game.game.title }}Title</h2></a>
-          <div class="info">
-            By <a href="#">Admin</a> June 12, 2015 - <i class="fa fa-comment"></i> 0 Comments
-            <ul class="list-inline">
-              <li><a href="#" style="text-decoration: underline;color:#333;">Free</a></li>
-              <li> - </li>
-              <li>
-                <span class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star-half-o"></i>
-                </span>
-              </li>
-            </ul>
-          </div>
+          <a href="{% url 'game_detail_view' pk=random_game.id %}"><h2>{{ random_game.game.title }}</h2></a>
 
         </div>
         <div class="art-content">
-          <img src="{% static "images/1.png" %}" />
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor inviduntut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt orem ipsum dolor sit amet, consetetur sadipscing <a href="xxx">MORE...</a></p>
-          <button type="submit" class="btn btn-skin"><i class="fa fa-check"></i> <span>Add to your library</span></button>
+          <img src="{{ random_game.game.cover_art }}" />
+          <p>{{ random_game.game.description }}</p>
+        <a href="{% url 'game_detail_view' pk=random_game.id %}" class="btn btn-skin">More Details</a>
         </div>
       </article>
-      
+
       <hr>
-  
+
     </div>
   </div>
 
   <div class="col-md-4">
     <div class="bs-sidebar affix hidden-xs hidden-sm" id="sidebar">
-      <h3>Recent Reviews</h3>
+      <h3>Recently Added Games</h3>
+
+
       <div id="owl-demo1" class="owl-carousel">
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/1.png" %}"/></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/2.png" %}"/></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/7.jpg" %}"/></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/3.png" %}"/></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/4.png" %}"/></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/5.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/6.png" %}" /></a>
-        </div>
+
+        {% for game in recent_games %}
+          <div class="item">
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img src="{{ game.game.cover_art }}" /></a>
+          </div>
+        {% endfor %}
+
       </div>
-      <h3>New</h3>
+
+      <h3>Try these games</h3>
+
       <div id="owl-demo2" class="owl-carousel">
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/1.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/2.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/7.jpg" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/3.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/4.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/5.png" %}" /></a>
-        </div>
-        <div class="item">
-          <a href="single.html"><img src="{% static "images/6.png" %}" /></a>
-        </div>
+
+        {% for game in other_random_games %}
+          <div class="item">
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img src="{{ game.game.cover_art }}" /></a>
+          </div>
+        {% endfor %}
+
       </div>
+
+
     </div>
   </div>
   </div>
