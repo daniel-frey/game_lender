@@ -28,8 +28,9 @@
               </div>
               <div class="art-content">
                 <img src="{{ game.game.cover_art }}" />
-                <button class="btn btn-skin">Status: {{ game.status }}</button>
-                <a href="{% url 'send_message_view' %}">Message user</a>
+                <p>{{ game.platform.platform_name }}</p>
+                <button class="btn btn-skin" style="display:block;">Status: {{ game.status }}</button>
+                <a href="{% url 'send_message_view' %}">Message user</a>              
               </div>
             </article>
             <hr>

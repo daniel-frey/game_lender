@@ -2,37 +2,37 @@
 
 {% block content %}
 <div id="page-content" class="index-page container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-1">
-      <div id="main-content">
+  <div class="col-md-8 col-md-offset-2 index-page container">
+    <div id="main-content">
+      <div class="art-header">
         <h2>Send a Message</h2>
 
         {% if messages %}
         {% for message in messages %}
-          <div>{{ message }}</div>
+        <div>{{ message }}</div>
         {% endfor %}
         {% endif %}
-        <form method="POST" action="{% url 'send_message_view' %}">
-        {% csrf_token %}
-        {% if view.user_message == None %}
-        {{ form.as_table }}
-        {% else %}
-        {{ form.to_user.label_tag }}
-        <input type="text" name="to_user" maxlength="100" required id="id_to_user" value="{{ view.user_message.from_user }}">
+        <form method="POST" action="{% url 'send_message_view' %}" id="ff">
+          {% csrf_token %}
+          {% if view.user_message == None %}
+          {{ form.as_table }}
+          {% else %}
+          {{ form.to_user.label_tag }}
+          <input type="text" name="to_user" maxlength="100" required id="id_to_user" value="{{ view.user_message.from_user }}">
 
-        {{ form.subject.label_tag }}
-        <input type="text" name="subject" maxlength="100" required id="id_subject" value="Re: {{ view.user_message.subject }}">
+          {{ form.subject.label_tag }}
+          <input type="text" name="subject" maxlength="100" required id="id_subject" value="Re: {{ view.user_message.subject }}">
 
-        {{ form.body.label_tag }}
-        <textarea name="body" cols="40" rows="10" required="" id="id_body">
+          {{ form.body.label_tag }}
+          <textarea name="body" cols="40" rows="10" required="" id="id_body">
 
 
-        --- Sent by {{ view.user_message.from_user.username }} on {{ view.user_message.sent_date }} ---
-        {{ view.user_message.body }}
-        </textarea>
-        {% endif %}
+--- Sent by {{ view.user_message.from_user.username }} on {{ view.user_message.sent_date }} ---
+{{ view.user_message.body }}
+</textarea>
+          {% endif %}
 
-        <input type="submit" value="Send">
+          <input type="submit" value="Send">
         </form>
       </div>
     </div>
