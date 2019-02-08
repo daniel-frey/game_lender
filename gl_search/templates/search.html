@@ -1,26 +1,33 @@
-{% block title %}Search{% endblock title %}
+{% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
-<div class="game_search">
-<form method="get">
-  <input type="text" name="name">
-  <button type="submit">Search</button>
-</form>
-
-{% for game in games.items %}
-  {% for entries in game %}
-  {% if entries and entries.cover or entries.rating %}
-    <h1>{{entries.name}}</h1>
-    {% if entries.summary %}
-      <p>{{entries.summary}}</p>
-      {% endif %}
-    {% if entries.cover %}
-      <img src=http:{{entries.cover}}>
-    {% endif %}
-    {% if entries.rating %}
-     <h2>Rating: {{entries.rating}}</h2>
-    {% endif %}
-  {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% endblock content %}
+<div id="page-content" class="index-page container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div id="main-content">
+        <div class="game_search">
+          <form method="get">
+            <input type="text" name="name">
+            <button type="submit">Search</button>
+          </form>
+          {% for game in games.items %}
+          {% for entries in game %}
+          {% if entries and entries.cover or entries.rating %}
+          <h1>{{entries.name}}</h1>
+          {% if entries.summary %}
+          <p>{{entries.summary}}</p>
+          {% endif %}
+          {% if entries.cover %}
+          <img src=http:{{entries.cover}}>
+          {% endif %}
+          {% if entries.rating %}
+          <h2>Rating: {{entries.rating}}</h2>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
