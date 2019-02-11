@@ -1,0 +1,111 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="page-content" class="index-page container">
+  <div class="row">
+    <div class="col-md-14 pad-10">
+      <div id="main-content">
+        <h2>Your Profile</h2>
+        {% if messages %}
+        {% for message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        {% if user_messages %}
+        <h3>Messages</h3>
+        <table>
+            <thead>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Received</th>
+            </thead>
+            {% for message in user_messages %}
+            <tr>
+              <td>{{ message.from_user.username }}</td>
+              {% if message.read == True %}
+              <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-style:italic;">{{ message.subject }}</a></td>
+              {% else %}
+              <td><a href="{% url 'message_detail_view' pk=message.id %}" style="font-weight:900;">{{ message.subject }} (new)</a></td>
+              {% endif %}
+              <td>{{ message.sent_date }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+          <a href="{% url 'inbox_view' %}">see all</a>
+        {% endif %}
+
+        <div id="tabs">
+            <a class="tab active btn btn-skin" id="tab-0">Borrowing</a>
+            <a class="tab btn btn-skin" id="tab-1">Lending</a>
+            <a class="tab btn btn-skin" id="tab-2">Borrow Requests</a>
+            <a class="tab btn btn-skin" id="tab-3">Your Borrows</a>
+            <div class="tab-content" id="tab-content-0">
+              <ul>
+                {% for game in borrowing_games %}
+                <li>
+                  {{ game.game.title }} (borrowed {{ game.checked_out_date }})
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="tab-content" id="tab-content-1">
+              <ul>
+                  {% for game in lending_games %}
+                  <li>{{ game.game.title }} (lending to {{ game.checked_out_user }} since {{game.checked_out_date}})</li>
+                  <form method="POST" action="{% url 'mark_as_returned_view' %}">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ game.id }}" name="game_id">
+                    <input class="btn btn-skin" type="submit" value="Mark as returned">
+                  </form>
+                  {% endfor %}
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-content-2"><ul>
+                {% for request in incoming_borrow_requests %}
+                <li>
+                  {{ request.game.game.title }} (requested by {{ request.borrower }})
+                  <form method="POST" action="{% url 'accept_request_view' %}">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ request.id }}" name="request">
+                    <input type="submit" class="btn btn-skin" value="Accept Request">
+                  </form>
+                  <form method="POST" action="{% url 'deny_request_view' %}">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ request.id }}" name="request">
+                    <input type="submit" class="btn btn-skin" value="Deny Request">
+                  </form>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="tab-content" id="tab-content-3"><ul>
+                {% for request in outgoing_borrow_requests %}
+                <li>
+                  {{ request.game.game.title }} (owned by {{ request.game.owner }})
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var current = 0;
+    var tabs = document.getElementsByClassName('tab');
+    for(var i=0; i<tabs.length; i++) {
+        var tab = tabs[i];
+        tab.addEventListener('click', function() {
+            var activeTab = document.getElementById('tab-'+current).classList.remove('active');
+            var activeContent = document.getElementById('tab-content-'+current).classList.remove('active');
+
+            current = parseInt(this.id.replace(/\D/g,''));
+
+            activeTab = document.getElementById('tab-'+current).classList.add('active');
+            activeContent = document.getElementById('tab-content-'+current).classList.add('active');
+        });
+    }
+</script>
+{% endblock content %}

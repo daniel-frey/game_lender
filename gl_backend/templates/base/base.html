@@ -1,0 +1,173 @@
+{% load sass_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% sass_src 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% sass_src 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% sass_src 'owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% sass_src 'owl-carousel/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% sass_src 'css/_base.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Asap:400,700" rel="stylesheet" type="text/css">
+    <title>Game Lender</title>
+</head>
+<body>
+  <header>
+      <div class="top container">
+          <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'home' %}"><img class="toplogo" src="{% static "images/logo.svg" %}"/></a>
+            </div>
+          </div>
+        </div>
+      <div id="nav-wrapper">
+          <div id="nav" class="navbar navbar-default navbar-inner container">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                  <!-- BAR CONTENTS -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </button>
+                  </div>
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <div id="search-nav">
+                          <form id="game-search" class="stroke header-searchbox" action="/search" method="get">
+                            <div class="form-group">
+                                <input type="text" id="search" name="name" class="form-control header-search border" placeholder="Search for game">
+                              <div class="input-group-btn" id="searchButton">
+                                <button class="btn btn-default border" type="submit">
+                                  <i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                    <!-- RIGHT CONTENT -->
+                    <ul class="nav navbar-nav navbar-right">
+                      {% if user.is_authenticated %}
+                      <li><a href="{% url 'inbox_view' %}">Messages</a></li>
+                      <li><a href="{% url 'game_list_view' id=user.id %}">My Library</a></li>
+                      <li><a href="{% url 'profile_view' %}">Profile</a></li>
+                      <li><a href="{% url 'logout' %}">Log Out</a></li>
+                      {% else %}
+                      <li><a href="{% url 'login' %}">Log In</a></li>
+                      <li><a href="{% url 'django_registration_register' %}">Sign Up</a></li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </div> <!-- col -->
+              </div> <!-- row -->
+          </div> <!-- nav -->
+        </div> <!-- wrapper -->
+        <div class="container">
+          <!-- CAROUSEL -->
+          <div id="carousel-example-generic" class="carousel slide row hidden-xs" data-ride="carousel" data-interval="4000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item item-b active">
+                <img src="{% static "images/banner1.png" %}" alt="..." style="width:100%">
+              </div>
+              <div class="item item-b">
+                <img src="{% static "images/banner2.png" %}" alt="..." style="width:100%">
+              </div>
+              <div class="item item-b">
+                <img src="{% static "images/banner3.png" %}" alt="..." style="width:100%">
+              </div>
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+  </header>
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+  <footer class="container ">
+		<div class="row">
+			<div class="col-md-4">
+				<p>Copyright 2019 Fueled by Beer</p>
+			</div>
+			<div class="col-md-4">
+				<ul class="list-inline social-buttons">
+					<li><a href="#"><i class="fa fa-twitter"></i></a>
+					</li>
+					<li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+					</li>
+					<li><a href="#"><i class="fa fa-linkedin"></i></a>
+					</li>
+					<li><a href="#"><i class="fa fa-pinterest"></i></a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<ul class="list-inline quicklinks">
+					</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+  <script type="text/javascript" src="{% static "owl-carousel/jquery-2.1.1.js" %}"></script>
+<script type="text/javascript" src="{% static "owl-carousel/bootstrap.min.js" %}"></script>
+
+	<script>
+		if ($(window).width() < 1199) {
+			$('#sidebar').affix({
+			  offset: {
+				top: 398
+			  }
+			});
+		} else {
+			$('#sidebar').affix({
+			  offset: {
+				top: 442
+			  }
+			});
+		}
+
+		$(function() {
+			$('#nav-wrapper').height($("#nav").height());
+
+			$('#nav').affix({
+				offset: { top: $('#nav').offset().top }
+			});
+		});
+	</script>
+
+	<script src="{% static "owl-carousel/owl.carousel.js" %}"></script>
+    <script>
+    $(document).ready(function() {
+      $("#owl-demo1").owlCarousel({
+        autoPlay: 3000,
+        items : 3,
+		itemsDesktop : [1199,2],
+        itemsDesktopSmall : [979,2]
+      });
+	  $("#owl-demo2").owlCarousel({
+        autoPlay: 3000,
+        items : 3,
+		itemsDesktop : [1199,2],
+        itemsDesktopSmall : [979,2]
+      });
+    });
+    </script>
+</body>
+</html>

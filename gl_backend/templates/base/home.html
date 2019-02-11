@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div id="page-content" class="index-page container">
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <div id="main-content">
+      <article>
+        <p style="font-size: 1.3em;">Welcome to Game Lender. Create an account and start searching for and adding games to your library, and once you’ve filled it out, you can request to borrow games from other users. Watch your messages to see whether other users are looking to borrow your games!</p>
+
+        {% if random_game %}
+
+        <div class="art-header">
+          <a href="{% url 'game_detail_view' pk=random_game.id %}"><h2>{{ random_game.game.title }}</h2></a>
+
+        </div>
+        <div class="art-content">
+          <img class="border" src="{{ random_game.game.cover_art }}" />
+          <p>{{ random_game.game.description|truncatechars:150 }}</p>
+        <a href="{% url 'game_detail_view' pk=random_game.id %}" class="btn btn-skin">More Details</a>
+        </div>
+
+        {% endif %}
+      </article>
+
+      <hr>
+
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="bs-sidebar affix hidden-xs hidden-sm" id="sidebar">
+      <h3>Recently Added Games</h3>
+
+
+      <div id="owl-demo1" class="owl-carousel">
+
+        {% for game in recent_games %}
+          <div class="item">
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img class="border" src="{{ game.game.cover_art }}" /></a>
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <h3>Try these games</h3>
+
+      <div id="owl-demo2" class="owl-carousel">
+
+        {% for game in other_random_games %}
+          <div class="item">
+            <a href="{% url 'game_detail_view' pk=game.id %}"><img class="border" src="{{ game.game.cover_art }}" /></a>
+          </div>
+        {% endfor %}
+
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock content %}

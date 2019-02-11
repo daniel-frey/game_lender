@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div id="page-content" class="single-page container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div id="main-content">
+				<article>
+					<div class="art-header">
+						<h2>{{ game.game.title }}</h2>
+            <p>{{ game.platform.platform_name }}</p>
+						<div id="owl-demo1" class="owl-carousel">
+							<div class="item">
+                  <img class="border" src="{{ game.game.cover_art }}" />
+							</div>
+            </div>
+            <p style="margin-top: 20px">{{ game.game.description }}</p>
+            {% if game.owner != user %}
+              <a href="{% url 'borrow_confirmation_view' pk=game.id %}" class="btn btn-skin"><i class="fa fa-question"></i> Request to borrow</a>
+              <a href="{% url 'send_message_view' %}" class="btn btn-skin"><i class="fa fa-envelope"></i> Send message</a>
+            {% else %}
+              <a href="{% url 'own_game_list_view' %}" class="btn btn-skin"><i class="fa fa-arrow-left"></i> <span>Back to your library</span></a>
+            {% endif %}
+					</div>
+					<div class="art-content">
+						<hr>
+					</div>
+				</article>
+			</div>
+		</div>
+{% endblock content %}

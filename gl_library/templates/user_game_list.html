@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="page-content" class="index-page container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div id="main-content">
+        {% if user == owner %}
+        <h1 class="t-center">Your Games</h1>
+        {% if messages %}
+        {% for message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <p>Share this link to your library:</p>
+        <input class="border" value="http://{{ request.get_host }}{% url 'game_list_view' id=user.id %}" />
+
+        {% else %}
+        <h2>{{ owner.username }}'s games</h2>
+        {% endif %}
+      </div>
+      {% for game in games %}
+      <div class="row">
+        <div class="col-md-10 col-md-offset-5">
+          <div id="main-content">
+            <article>
+              <div class="art-header">
+                <a href="{% url 'game_detail_view' pk=game.id %}">
+                  <h3>{{ game.game.title }}</h3>
+                </a>
+              </div>
+              <div class="art-content">
+                <img class="border" src="{{ game.game.cover_art }}" />
+                <p>{{ game.platform.platform_name }}</p>
+                <button class="btn btn-skin" style="display:block;">Status: {{ game.status }}</button>
+              </div>
+            </article>
+            <hr>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
